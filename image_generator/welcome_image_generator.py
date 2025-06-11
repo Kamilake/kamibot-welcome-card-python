@@ -78,7 +78,7 @@ class WelcomeImageGenerator:
                 self._draw_header_text(draw, header_text, width // 2, header_y, theme)
             
             title_x = profile_x + profile_diameter + 60
-            title_y = profile_title_y - 170
+            title_y = profile_title_y - 100
             actual_title_font_size = self._draw_title(draw, title_text, title_x, title_y, username_color, strikeout, theme, suffix_text)
             
             suffix_end_x = title_x
@@ -178,10 +178,10 @@ class WelcomeImageGenerator:
         )
         
         if strikeout:
-            line_y = y + (font_size // 1.2)
+            line_y = y + (font_size // 2)
             draw.line((x, line_y, x + actual_width, line_y), 
                      fill=(255, 255, 255) if color == (255, 255, 255) else (192, 192, 192), 
-                     width=25)
+                     width=20)
         
         return font_size
     
