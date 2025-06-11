@@ -9,6 +9,7 @@ class FontManager:
         # 시스템에 설치된 다양한 폰트 경로 (TTC 파일의 경우 인덱스 포함)
         self.font_paths = {
             # 한국어 폰트 (나눔)
+            'nanum_square_ac': '/usr/share/fonts/truetype/nanum/NanumSquare_acB.ttf',
             'nanum_square': '/usr/share/fonts/truetype/nanum/NanumSquareB.ttf',
             'nanum_gothic': '/usr/share/fonts/truetype/nanum/NanumGothic.ttf',
             'nanum_gothic_bold': '/usr/share/fonts/truetype/nanum/NanumGothicBold.ttf',
@@ -131,85 +132,85 @@ class FontManager:
                 self.available_fonts[name] = (path, font_index) if font_index is not None else path
                 print(f"폰트 발견: {name} -> {path}" + (f" (인덱스: {font_index})" if font_index is not None else ""))
         
-        # 통합된 폰트 우선순위 목록 (높은 우선순위부터) - Noto 폰트 패밀리 우선순위 상승
         self.font_priority = [
-            'noto_sans_kr_bold',    # 1순위: Noto Sans 한국어 볼드
-            'noto_sans_kr',         # 2순위: Noto Sans 한국어
-            'noto_serif_kr_bold',   # 3순위: Noto Serif 한국어 볼드
-            'noto_serif_kr',        # 4순위: Noto Serif 한국어
-            'noto_sans_bold',       # 5순위: Noto Sans 볼드
-            'noto_sans',            # 6순위: Noto Sans
-            'noto_emoji',           # 7순위: Noto 이모지 컬러
-            'noto_emoji_regular',   # 8순위: Noto 이모지 일반
-            'noto_mono',            # 9순위: Noto Mono
-            'segoe_ui_bold',        # 10순위: Segoe UI 볼드
-            'segoe_ui',             # 11순위: Segoe UI
-            'segoe_ui_semibold',    # 12순위: Segoe UI 세미볼드
-            'segoe_ui_emoji',       # 13순위: Segoe UI 이모지
-            'segoe_ui_symbol',      # 14순위: Segoe UI 심볼
-            'nanum_square',         # 15순위: 나눔스퀘어
-            'nanum_gothic_bold',    # 16순위: 나눔고딕 볼드
-            'nanum_gothic',         # 17순위: 나눔고딕
-            'segoe_ui_light',       # 18순위: Segoe UI 라이트
-            'segoe_ui_italic',      # 19순위: Segoe UI 이탤릭
-            'segoe_ui_bold_italic', # 20순위: Segoe UI 볼드 이탤릭
-            'segoe_ui_black',       # 21순위: Segoe UI 블랙
-            'segoe_ui_historic',    # 22순위: Segoe UI 히스토릭
-            'carlito_bold',         # 23순위: Carlito 볼드 (Calibri 대체)
-            'carlito',              # 24순위: Carlito (Calibri 대체)
-            'caladea_bold',         # 25순위: Caladea 볼드 (Cambria 대체)
-            'caladea',              # 26순위: Caladea (Cambria 대체)
-            'dejavu_sans_bold',     # 27순위: DejaVu Sans 볼드
-            'dejavu_sans',          # 28순위: DejaVu Sans
-            'roboto_bold',          # 29순위: Roboto 볼드
-            'roboto',               # 30순위: Roboto
-            'liberation_sans_bold', # 31순위: Liberation Sans 볼드
-            'liberation_sans',      # 32순위: Liberation Sans
-            'open_sans_bold',       # 33순위: Open Sans 볼드
-            'open_sans',            # 34순위: Open Sans
-            'lato_bold',            # 35순위: Lato 볼드
-            'lato',                 # 36순위: Lato
-            'takao_gothic',         # 37순위: 일본어 고딕
-            'takao_pgothic',        # 38순위: 일본어 P고딕
-            'wqy_microhei',         # 39순위: 중국어 폰트
-            'wqy_zenhei',           # 40순위: 중국어 젠헤이
-            'arphic_ukai',          # 41순위: 중국어 우카이
-            'arphic_uming',         # 42순위: 중국어 우밍
-            'roboto_slab_bold',     # 43순위: Roboto Slab 볼드
-            'roboto_slab',          # 44순위: Roboto Slab
-            'liberation2_sans',     # 45순위: Liberation2 Sans
-            'dejavu_serif_bold',    # 46순위: DejaVu Serif 볼드
-            'dejavu_serif',         # 47순위: DejaVu Serif
-            'liberation_serif_bold', # 48순위: Liberation Serif 볼드
-            'liberation_serif',     # 49순위: Liberation Serif
-            'freefont_sans_bold',   # 50순위: FreeSans 볼드
-            'freefont_sans',        # 51순위: FreeSans
-            'droid_fallback',       # 52순위: Droid Fallback
-            'takao_mincho',         # 53순위: 일본어 명조
-            'takao_pmincho',        # 54순위: 일본어 P명조
-            'fira_code_bold',       # 55순위: FiraCode 볼드
-            'fira_code',            # 56순위: FiraCode
-            'jetbrains_mono_bold',  # 57순위: JetBrains Mono 볼드
-            'jetbrains_mono',       # 58순위: JetBrains Mono
-            'hack_bold',            # 59순위: Hack 볼드
-            'hack',                 # 60순위: Hack
-            'dejavu_mono_bold',     # 61순위: DejaVu Mono 볼드
-            'dejavu_mono',          # 62순위: DejaVu Mono
-            'liberation_mono_bold', # 63순위: Liberation Mono 볼드
-            'liberation_mono',      # 64순위: Liberation Mono
-            'liberation2_mono',     # 65순위: Liberation2 Mono
-            'freefont_mono_bold',   # 66순위: FreeMono 볼드
-            'freefont_mono',        # 67순위: FreeMono
-            'inconsolata',          # 68순위: Inconsolata
-            'cascadia_code',        # 69순위: Cascadia Code
-            'nanum_myeongjo_bold',  # 70순위: 나눔명조 볼드
-            'nanum_myeongjo',       # 71순위: 나눔명조
-            'nanum_coding',         # 72순위: 나눔고딕코딩
-            'freefont_serif_bold',  # 73순위: FreeSerif 볼드
-            'freefont_serif',       # 74순위: FreeSerif
-            'liberation2_serif',    # 75순위: Liberation2 Serif
-            'opensymbol',           # 76순위: OpenSymbol
-            'font_awesome'          # 77순위: FontAwesome
+            'nanum_square_ac',      # 1순위: 나눔스퀘어 AC
+            'nanum_square',         # 2순위: 나눔스퀘어
+            'nanum_gothic_bold',    # 3순위: 나눔고딕 볼드
+            'nanum_gothic',         # 4순위: 나눔고딕
+            'nanum_myeongjo_bold',  # 5순위: 나눔명조 볼드
+            'nanum_myeongjo',       # 6순위: 나눔명조
+            'nanum_coding',         # 7순위: 나눔고딕코딩
+            'noto_sans_kr_bold',    # 8순위: Noto Sans 한국어 볼드
+            'noto_sans_kr',         # 9순위: Noto Sans 한국어
+            'noto_serif_kr_bold',   # 10순위: Noto Serif 한국어 볼드
+            'noto_serif_kr',        # 11순위: Noto Serif 한국어
+            'noto_sans_bold',       # 12순위: Noto Sans 볼드
+            'noto_sans',            # 13순위: Noto Sans
+            'noto_emoji',           # 14순위: Noto 이모지 컬러
+            'noto_emoji_regular',   # 15순위: Noto 이모지 일반
+            'noto_mono',            # 16순위: Noto Mono
+            'segoe_ui_bold',        # 17순위: Segoe UI 볼드
+            'segoe_ui',             # 18순위: Segoe UI
+            'segoe_ui_semibold',    # 19순위: Segoe UI 세미볼드
+            'segoe_ui_emoji',       # 20순위: Segoe UI 이모지
+            'segoe_ui_symbol',      # 21순위: Segoe UI 심볼
+            'segoe_ui_light',       # 22순위: Segoe UI 라이트
+            'segoe_ui_italic',      # 23순위: Segoe UI 이탤릭
+            'segoe_ui_bold_italic', # 24순위: Segoe UI 볼드 이탤릭
+            'segoe_ui_black',       # 25순위: Segoe UI 블랙
+            'segoe_ui_historic',    # 26순위: Segoe UI 히스토릭
+            'carlito_bold',         # 27순위: Carlito 볼드 (Calibri 대체)
+            'carlito',              # 28순위: Carlito (Calibri 대체)
+            'caladea_bold',         # 29순위: Caladea 볼드 (Cambria 대체)
+            'caladea',              # 30순위: Caladea (Cambria 대체)
+            'dejavu_sans_bold',     # 31순위: DejaVu Sans 볼드
+            'dejavu_sans',          # 32순위: DejaVu Sans
+            'roboto_bold',          # 33순위: Roboto 볼드
+            'roboto',               # 34순위: Roboto
+            'liberation_sans_bold', # 35순위: Liberation Sans 볼드
+            'liberation_sans',      # 36순위: Liberation Sans
+            'open_sans_bold',       # 37순위: Open Sans 볼드
+            'open_sans',            # 38순위: Open Sans
+            'lato_bold',            # 39순위: Lato 볼드
+            'lato',                 # 40순위: Lato
+            'takao_gothic',         # 41순위: 일본어 고딕
+            'takao_pgothic',        # 42순위: 일본어 P고딕
+            'wqy_microhei',         # 43순위: 중국어 폰트
+            'wqy_zenhei',           # 44순위: 중국어 젠헤이
+            'arphic_ukai',          # 45순위: 중국어 우카이
+            'arphic_uming',         # 46순위: 중국어 우밍
+            'roboto_slab_bold',     # 47순위: Roboto Slab 볼드
+            'roboto_slab',          # 48순위: Roboto Slab
+            'liberation2_sans',     # 49순위: Liberation2 Sans
+            'dejavu_serif_bold',    # 50순위: DejaVu Serif 볼드
+            'dejavu_serif',         # 51순위: DejaVu Serif
+            'liberation_serif_bold', # 52순위: Liberation Serif 볼드
+            'liberation_serif',     # 53순위: Liberation Serif
+            'freefont_sans_bold',   # 54순위: FreeSans 볼드
+            'freefont_sans',        # 55순위: FreeSans
+            'droid_fallback',       # 56순위: Droid Fallback
+            'takao_mincho',         # 57순위: 일본어 명조
+            'takao_pmincho',        # 58순위: 일본어 P명조
+            'fira_code_bold',       # 59순위: FiraCode 볼드
+            'fira_code',            # 60순위: FiraCode
+            'jetbrains_mono_bold',  # 61순위: JetBrains Mono 볼드
+            'jetbrains_mono',       # 62순위: JetBrains Mono
+            'hack_bold',            # 63순위: Hack 볼드
+            'hack',                 # 64순위: Hack
+            'dejavu_mono_bold',     # 65순위: DejaVu Mono 볼드
+            'dejavu_mono',          # 66순위: DejaVu Mono
+            'liberation_mono_bold', # 67순위: Liberation Mono 볼드
+            'liberation_mono',      # 68순위: Liberation Mono
+            'liberation2_mono',     # 69순위: Liberation2 Mono
+            'freefont_mono_bold',   # 70순위: FreeMono 볼드
+            'freefont_mono',        # 71순위: FreeMono
+            'inconsolata',          # 72순위: Inconsolata
+            'cascadia_code',        # 73순위: Cascadia Code
+            'freefont_serif_bold',  # 74순위: FreeSerif 볼드
+            'freefont_serif',       # 75순위: FreeSerif
+            'liberation2_serif',    # 76순위: Liberation2 Serif
+            'opensymbol',           # 77순위: OpenSymbol
+            'font_awesome'          # 78순위: FontAwesome
         ]
         
         # 폰트 'cmap' 테이블 캐시
