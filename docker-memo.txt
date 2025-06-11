@@ -1,0 +1,5 @@
+docker compose -f ../docker-compose.yaml down python-welcome-service
+docker compose -f ../docker-compose.yaml up  -d python-welcome-service
+docker compose -f ../docker-compose.yaml exec python-welcome-service /bin/bash -c "cd /usr/src/app && exec /bin/bash"
+docker compose -f ../docker-compose.yaml up python-welcome-service --build
+docker compose -f ../docker-compose.yaml up python-welcome-service

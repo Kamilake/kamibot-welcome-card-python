@@ -1,0 +1,8 @@
+flask==3.0.0
+grpcio==1.60.0
+grpcio-tools==1.60.0
+protobuf==4.25.1
+Pillow[raqm]==10.2.0
+requests==2.31.0
+fonttools==4.43.1
+grapheme==0.6.0

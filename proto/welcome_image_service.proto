@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "kamilake.kamibot.grpc";
+option java_outer_classname = "WelcomeImageServiceProto";
+
+package welcome;
+
+// 테마 열거형
+enum WelcomeTheme {
+    THEME_DEFAULT = 0;
+    THEME_MINIMAL = 1;
+    THEME_GRADIENT = 2;
+    THEME_DARK = 3;
+    THEME_COLORFUL = 4;
+    THEME_GAMING = 5;
+    THEME_CUTE = 6;
+}
+
+// 이미지 생성 요청
+message GenerateWelcomeImageRequest {
+    string title_text = 1;
+    string subtitle_text = 2;
+    string avatar_url = 3;
+    string bg_url = 4;
+    string header_text = 5;
+    string footer_text = 6;
+    // 이름에 취소선을 표시할지 여부
+    bool strikeout = 7;
+
+    // 색상은 16진수 문자열로 전달 (예: "#FF0000")
+    string username_color_hex = 8;
+
+    // 텍스트 필드 추가
+    string suffix_text = 9;      // "님," 또는 "봇" 등
+
+    // 테마 선택
+    WelcomeTheme theme = 10;
+}
+
+// 이미지 생성 응답
+message GenerateWelcomeImageResponse {
+    bytes image_data = 1;
+    bool success = 2;
+    string error_message = 3;
+}
+
+// 서비스 정의
+service WelcomeImageService {
+    rpc GenerateWelcomeImage(GenerateWelcomeImageRequest) returns (GenerateWelcomeImageResponse);
+}
