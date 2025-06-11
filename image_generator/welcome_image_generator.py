@@ -190,8 +190,15 @@ class WelcomeImageGenerator:
         font_size = 105
         text_width = self.text_renderer.get_mixed_text_width(text, font_size)
         
+        # 중앙 정렬된 x 좌표 계산
+        subtitle_x = x - text_width // 2
+        
+        # x 좌표가 음수면 0으로 보정
+        if subtitle_x < 0:
+            subtitle_x = 0
+        
         self.text_renderer.render_mixed_text(
-            draw, text, x - text_width // 2, y, (230, 230, 230), font_size,
+            draw, text, subtitle_x, y, (230, 230, 230), font_size,
             shadow=theme.text_shadow, shadow_offset=2
         )
     
